@@ -47,7 +47,7 @@ const Sidebar = () => {
                         <NavLink to={el.path}>
                           <i className="icon"> {<el.icon />}</i>
                           <span className="text">{el.title}</span>
-                          <i className="icon"> {el.title == 'Audience' ? <PiCaretDownBold/>:""}</i>
+                          <i className="arrow"> {el.title == 'Audience' ? <PiCaretDownBold/>:""}</i>
                         </NavLink>
                         {el.submenu && (
                           <ul className={isMenuOpen ? "sub-menu-open" : "sub-menu"}>

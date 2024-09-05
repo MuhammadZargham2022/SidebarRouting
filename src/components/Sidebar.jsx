@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Sidebar.scss';
+import lastTwoMenu from './SideData';
 import { NavLink } from 'react-router-dom';
 import userImage from './assets/user.jpg';
 import {
@@ -8,8 +9,6 @@ import {
   PiUserBold,
   PiFileTextBold,
   PiCalendarBlankBold,
-  PiGearBold,
-  PiSignOutBold,
   PiCaretDownBold
 } from "react-icons/pi";
 
@@ -23,7 +22,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="container" >
         <div className={isclose ? "sidebar active" : "sidebar"}>
 
           <div className="menu-btn" onClick={ToggleSidebar}>
@@ -39,6 +38,7 @@ const Sidebar = () => {
               <p className="name">Sheeda Meeda</p>
             </div>
           </div>
+
           <div className="nav">
             <div className="menu">
               <p className="title">Main</p>
@@ -55,7 +55,7 @@ const Sidebar = () => {
                     <span className="text">Audience</span>
                     <i className="arrow"><PiCaretDownBold /></i>
                   </NavLink>
-                  <ul className={isMenuOpen? "sub-menu-open": "sub-menu"} >
+                  <ul className={isMenuOpen ? "sub-menu-open" : "sub-menu"} >
                     <li>
                       <NavLink to='user'>
                         <span className="text">User</span>
@@ -82,28 +82,22 @@ const Sidebar = () => {
                 </li>
               </ul>
             </div>
-            <div className="menu">
-              <p className="title">Settings</p>
-              <ul>
-                <li>
-                  <NavLink to='settings'>
-                    <i className="icon"><PiGearBold /></i>
-                    <span className="text">Settings</span>
-                  </NavLink>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="menu">
-            <p className="title">Account</p>
-            <ul>
-              <li>
-                <NavLink to='Logout'>
-                  <i className="icon"><PiSignOutBold /></i>
-                  <span className="text">Logout</span>
-                </NavLink>
-              </li>
-            </ul>
+
+            {lastTwoMenu.map((el, index) => {
+              return (
+                <div className="menu" key={index}>
+                  <p className="title">{el.menuHeading}</p>
+                  <ul>
+                    <li>
+                      <NavLink to={el.path}>
+                        <i className="icon"> {<el.icon />}</i>
+                        <span className="text">{el.title}</span>
+                      </NavLink>
+                    </li>
+                  </ul>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

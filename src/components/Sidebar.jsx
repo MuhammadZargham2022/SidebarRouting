@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import './Sidebar.scss';
 import sidebarElement from './SideData';
 import { NavLink } from 'react-router-dom';
@@ -36,7 +36,7 @@ const Sidebar = () => {
           </div>
           <div className="nav">
             <div className="menu">
-              
+
               {sidebarElement.map((el) => {
                 return (
                   <>
@@ -48,7 +48,7 @@ const Sidebar = () => {
                           <span className="text">{el.title}</span>
                         </NavLink>
                         {el.submenu && (
-                          <ul className={isMenuOpen ? "sub-menu-open" : "sub-menu"} >
+                          <ul className={isMenuOpen ? "sub-menu-open" : "sub-menu"}>
                             {el.submenu.map((subEl) => {
                               <li>
                                 <NavLink to={subEl.subpath}>

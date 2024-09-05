@@ -10,7 +10,7 @@ import {
 
 const sidebarElement = [
   {
-    menuHeading: 'Settings',
+    menuHeading: 'Main',
     title: "Dashboard",
     path: "/",
     icon: PiHouseSimpleBold,

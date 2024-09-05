@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './Sidebar.scss';
-import lastTwoMenu from './SideData';
+import sidebarElement from './SideData';
 import { NavLink } from 'react-router-dom';
 import userImage from './assets/user.jpg';
 import {
   PiCaretLeftBold,
-  PiHouseSimpleBold,
-  PiUserBold,
-  PiFileTextBold,
-  PiCalendarBlankBold,
-  PiCaretDownBold
+
 } from "react-icons/pi";
 
 const Sidebar = () => {
@@ -38,66 +34,36 @@ const Sidebar = () => {
               <p className="name">Sheeda Meeda</p>
             </div>
           </div>
-
           <div className="nav">
             <div className="menu">
-              <p className="title">Main</p>
-              <ul>
-                <li>
-                  <NavLink to='/'>
-                    <i className="icon"> <PiHouseSimpleBold /></i>
-                    <span className="text">Dashboard</span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to='audience' onClick={ToggleSubMenu}>
-                    <i className="icon"><PiUserBold /></i>
-                    <span className="text">Audience</span>
-                    <i className="arrow"><PiCaretDownBold /></i>
-                  </NavLink>
-                  <ul className={isMenuOpen ? "sub-menu-open" : "sub-menu"} >
-                    <li>
-                      <NavLink to='user'>
-                        <span className="text">User</span>
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink to='subscriber'>
-                        <span className="text">Subscriber</span>
-                      </NavLink>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <NavLink to='posts'>
-                    <i className="icon"> <PiFileTextBold /></i>
-                    <span className="text">Posts</span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to='schedules'>
-                    <i className="icon"> <PiCalendarBlankBold /></i>
-                    <span className="text">Schedules</span>
-                  </NavLink>
-                </li>
-              </ul>
+              
+              {sidebarElement.map((el) => {
+                return (
+                  <>
+                    <p className="title">{el.menuHeading}</p>
+                    <ul>
+                      <li>
+                        <NavLink to={el.path}>
+                          <i className="icon"> {<el.icon />}</i>
+                          <span className="text">{el.title}</span>
+                        </NavLink>
+                        {el.submenu && (
+                          <ul className={isMenuOpen ? "sub-menu-open" : "sub-menu"} >
+                            {el.submenu.map((subEl) => {
+                              <li>
+                                <NavLink to={subEl.subpath}>
+                                  <span className="text">{subEl.subtitle}</span>
+                                </NavLink>
+                              </li>
+                            })}
+                          </ul>
+                        )}
+                      </li>
+                    </ul>
+                  </>
+                );
+              })}
             </div>
-
-            {lastTwoMenu.map((el, index) => {
-              return (
-                <div className="menu" key={index}>
-                  <p className="title">{el.menuHeading}</p>
-                  <ul>
-                    <li>
-                      <NavLink to={el.path}>
-                        <i className="icon"> {<el.icon />}</i>
-                        <span className="text">{el.title}</span>
-                      </NavLink>
-                    </li>
-                  </ul>
-                </div>
-              );
-            })}
           </div>
         </div>
       </div>

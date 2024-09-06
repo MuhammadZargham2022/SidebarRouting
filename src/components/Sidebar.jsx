@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import './Sidebar.scss';
 import sidebarElement from './SideData';
 import { NavLink } from 'react-router-dom';
@@ -44,19 +44,26 @@ const Sidebar = () => {
                     <p className="title">{el.menuHeading}</p>
                     <ul>
                       <li>
-                        <NavLink to={el.path}>
-                          <i className="icon"> {<el.icon />}</i>
-                          <span className="text">{el.title}</span>
-                          <i className="arrow"> {el.title == 'Audience' ? <PiCaretDownBold/>:""}</i>
-                        </NavLink>
+                          <NavLink to={el.path} onClick={el.title == 'Audience' ? ToggleSubMenu : ""}>
+
+                            <i className="icon"> {<el.icon />}</i>
+                            <span className="text">{el.title}</span>
+                            <span>
+                              <i className="arrow"> {el.title == 'Audience' ? <PiCaretDownBold /> : ""}</i>
+                            </span>
+
+
+                          </NavLink>
                         {el.submenu && (
                           <ul className={isMenuOpen ? "sub-menu-open" : "sub-menu"}>
                             {el.submenu.map((subEl) => {
-                              <li>
-                                <NavLink to={subEl.subpath}>
-                                  <span className="text">{subEl.subtitle}</span>
-                                </NavLink>
-                              </li>
+                              return (
+                                <li>
+                                  <NavLink to={subEl.subpath}>
+                                    <span className="text">{subEl.subtitle}</span>
+                                  </NavLink>
+                                </li>
+                              );
                             })}
                           </ul>
                         )}
